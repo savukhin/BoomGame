@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public HUDController HUD;
+    public float HP = 100;
     public float moveSpeed;
     private Rigidbody rb;
 
@@ -19,7 +21,8 @@ public class FirstPersonController : MonoBehaviour
         MoveAndRotate();
     }
 
-    private void MoveAndRotate() {
+    private void MoveAndRotate()
+    {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         float angleToZ = transform.eulerAngles.y * Mathf.Deg2Rad;
@@ -28,7 +31,6 @@ public class FirstPersonController : MonoBehaviour
 		Vector3 direction = new Vector3((h*Mathf.Cos(angleToX) + v*Mathf.Sin(angleToZ)), 0f, (h*Mathf.Sin(angleToX) + v*Mathf.Cos(angleToZ))).normalized;
         rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
 
-        Vector3 rotation = new Vector3(-Input.GetAxis("Mouse Y") * 2f, 0f, 0f);
         transform.Rotate(0f, Input.GetAxis("Mouse X") * 3f, 0f);
     }
 }
