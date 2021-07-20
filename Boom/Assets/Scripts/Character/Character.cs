@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public float HP = 100;
+    public float maxHealthPoints = 100;
+    public float healthPoints = 100;
     public float jumpForce = 5f;
     public float moveSpeed;
     protected Rigidbody rb;
@@ -32,8 +33,8 @@ public class Character : MonoBehaviour
 
 
     public virtual void TakeDamage(float damage) {
-        HP -= damage;
-        if (HP <= 0)
+        healthPoints -= damage;
+        if (healthPoints <= 0)
             Destroy(gameObject);
     }
 }

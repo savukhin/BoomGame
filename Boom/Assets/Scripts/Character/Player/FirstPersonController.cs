@@ -23,6 +23,8 @@ public class FirstPersonController : Character
     {
         base.Start();
         ChangeWeapon(0);
+        HUD.UpdateMaxHP(maxHealthPoints);
+        HUD.UpdateHP(healthPoints);
     }
 
     void Fire () {
@@ -55,6 +57,6 @@ public class FirstPersonController : Character
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        HUD.UpdateHP(HP);
+        HUD.UpdateHP(healthPoints);
     }
 }
