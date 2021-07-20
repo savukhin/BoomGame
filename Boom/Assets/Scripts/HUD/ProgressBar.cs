@@ -56,9 +56,6 @@ public class ProgressBar : MonoBehaviour
     void Start()
     {
         width = GetComponent<RectTransform>().rect.width * GetComponent<RectTransform>().localScale.x;
-        handler.GetComponent<RectTransform>().sizeDelta = new Vector2(
-                                handler.GetComponent<RectTransform>().rect.width,
-                                handler.GetComponent<RectTransform>().rect.height);
         Refresh();
     }
 }

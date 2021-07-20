@@ -5,6 +5,10 @@ using UnityEngine;
 public class HUDController : MonoBehaviour
 {
     public ProgressBar HPBar;
+
+    public void UpdateHP(float HP) {
+        HPBar.current = HP;
+    }
     
     // Start is called before the first frame update
     void Start()
