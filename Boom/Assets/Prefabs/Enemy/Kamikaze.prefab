@@ -79,7 +79,8 @@ MonoBehaviour:
   maxHealthPoints: 40
   healthPoints: 100
   jumpForce: 5
-  moveSpeed: 2
+  maxSpeed: 6
+  moveSpeed: 5
   target: {x: 0, y: 0, z: 0}
   attackRange: 2
   attackRate: 1

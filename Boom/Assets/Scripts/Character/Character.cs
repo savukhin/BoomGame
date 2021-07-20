@@ -24,14 +24,14 @@ public class Character : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
 
     protected virtual void FixedUpdate() {
-        if (rb.velocity.magnitude > maxSpeed)
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+        // if (rb.velocity.magnitude > maxSpeed)
+        //     rb.velocity = rb.velocity.normalized * maxSpeed;
     }
 
     private bool isMovingForward = false;

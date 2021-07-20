@@ -32,9 +32,9 @@ public class FirstPersonController : Character
             currentWeapon.Fire();
     }
 
-    protected override void FixedUpdate()
+    protected override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             Jump();
         if (Input.GetMouseButtonDown(0))
