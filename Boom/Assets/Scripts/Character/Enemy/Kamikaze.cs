@@ -9,16 +9,6 @@ public class Kamikaze : BaseEnemy
     public float boomRange = 3f;
     public float boomDamage = 50f;
 
-    public override void Activate() {
-        base.Activate();
-        StartCoroutine("PersueTheTarget");
-    }
-
-    public override void Deactivate() {
-        base.Deactivate();
-        StopCoroutine("PersueTheTarget");
-    }
-
     protected override void Attack()
     {
         base.Attack();
@@ -32,19 +22,6 @@ public class Kamikaze : BaseEnemy
                 player.TakeDamage(boomDamage);
         }
         Destroy(gameObject);
-    }
-
-    IEnumerator PersueTheTarget() {
-        for (;;) {
-            target = activationZone.target.transform.position;
-            target = new Vector3(target.x, 0, target.z);
-            if (MoveToTarget()) {
-                Attack();
-                yield return null;
-            } else {
-            }
-            yield return null;
-        }
     }
 
     void OnDrawGizmos() {

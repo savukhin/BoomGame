@@ -32,8 +32,9 @@ public class FirstPersonController : Character
             currentWeapon.Fire();
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             Jump();
         if (Input.GetMouseButtonDown(0))
@@ -49,7 +50,7 @@ public class FirstPersonController : Character
 		float angleToX = (360 - transform.eulerAngles.y) * Mathf.Deg2Rad;
 
 		Vector3 direction = new Vector3((h*Mathf.Cos(angleToX) + v*Mathf.Sin(angleToZ)), 0f, (h*Mathf.Sin(angleToX) + v*Mathf.Cos(angleToZ))).normalized;
-        rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
+        MoveInDirection(direction);
 
         transform.Rotate(0f, Input.GetAxis("Mouse X") * 3f, 0f);
     }

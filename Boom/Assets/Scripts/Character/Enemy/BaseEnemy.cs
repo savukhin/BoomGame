@@ -9,6 +9,7 @@ public class BaseEnemy : Character
     public float attackRate = 1;
     public ActivationZone activationZone;
     protected bool attacking = false;
+    public float attackCooldown = 1f;
 
     // Start is called before the first frame update
     protected override void Start() {
@@ -21,18 +22,21 @@ public class BaseEnemy : Character
     protected bool RotateToTarget() {
         var q = Quaternion.LookRotation(target - new Vector3(transform.position.x, 0, transform.position.z));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 90 * Time.deltaTime);
-
         return true;
     }
 
     // Returns true if target in attack range
     protected bool MoveToTarget() {
-        var q = Quaternion.LookRotation(target - new Vector3(transform.position.x, 0, transform.position.z));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 90 * Time.deltaTime);
+        Vector3 direction = (target - transform.position).normalized;
+        Vector3 rotateDirection = target - new Vector3(transform.position.x, 0, transform.position.z);
+        var q = Quaternion.LookRotation(rotateDirection);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 360 * Time.deltaTime);
+        
+        if ((rotateDirection.normalized - transform.forward.normalized).magnitude > 0.1f)
+            return false;
 
         if ((target - transform.position).magnitude > attackRange && !attacking) {
-            Vector3 direction = (target - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
+            MoveInDirection(direction);
             return false;
         } else {
             return true;
@@ -42,6 +46,19 @@ public class BaseEnemy : Character
     protected virtual void Attack() {
 
     } 
+
+     IEnumerator PersueTheTarget() {
+        for (;;) {
+            target = activationZone.target.transform.position;
+            target = new Vector3(target.x, 0, target.z);
+            if (MoveToTarget()) {
+                Attack();
+                yield return new WaitForSeconds(attackCooldown);
+            } else {
+            }
+            yield return null;
+        }
+    }
 
     IEnumerator WanderAround() {
         for(;;) {
@@ -60,10 +77,12 @@ public class BaseEnemy : Character
     public virtual void Activate() {
         target = activationZone.target.transform.position;
         StopCoroutine("WanderAround");
+        StartCoroutine("PersueTheTarget");
     }
 
     public virtual void Deactivate() {
         //target = new Vector3();
         StartCoroutine("WanderAround");
+        StopCoroutine("PersueTheTarget");
     }
 }

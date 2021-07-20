@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class RangedRobot : BaseEnemy
 {
-    // Start is called before the first frame update
-    void Start()
+    public BaseBullet bulletPrefab;
+    public GameObject strikePoint;
+
+    protected override void Attack()
     {
-        
+        base.Attack();
+        //Vector3 direction = (target - transform.position).normalized;
+        var bullet = Instantiate(bulletPrefab, strikePoint.transform.position, strikePoint.transform.rotation);
+        bullet.hitTags.Add("Player");
+        bullet.ingoreTags.Add("Enemy");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
