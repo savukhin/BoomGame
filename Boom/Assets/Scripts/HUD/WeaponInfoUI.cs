@@ -12,7 +12,7 @@ public class WeaponInfoUI : MonoBehaviour
     
     void Update() {
         if (currentWeapon) {
-            weaponNameText.text = currentWeapon.name;
+            weaponNameText.text = currentWeapon.weaponName;
             weaponMagazineText.text = currentWeapon.bulletsMagazine.ToString();
             weaponStockText.text = currentWeapon.bulletsStock.ToString();
         } else {

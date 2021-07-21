@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Drop : MonoBehaviour
 {
-    public enum Types {
-        pistol = 1,
+    public enum TypesEnum {
+        weapon = 1,
     }
-
-    public Types type = Types.pistol;
+    public GameObject item;
+    public TypesEnum type;
 }

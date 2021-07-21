@@ -134,7 +134,8 @@ MonoBehaviour:
   bulletsCapacity: 5
   bulletsStock: 5
   bulletsMagazine: 5
-  reloadTime: 2
+  reloadTime: 1.4
+  weaponName: Wierd Shotgun
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
   bulletCount: 5
   strifeRadius: 20

@@ -7,11 +7,12 @@ public class FirstPersonController : Character
     public HUDController HUD;
     public GameObject WeaponSpot;
     public BaseWeapon[] weaponPrefabs;
+    public List<BaseWeapon> weapons = new List<BaseWeapon>();
     private BaseWeapon currentWeapon;
     private bool canFire = false;
 
     bool ChangeWeapon(int number) {
-        if (weaponPrefabs.Length - 1 < number)
+        if (weapons.Count - 1 < number || currentWeapon == weapons[number])
             return false;
         StopCoroutine("ChangeWeaponAnimation");
         StartCoroutine(ChangeWeponAnimation(number));
@@ -32,9 +33,11 @@ public class FirstPersonController : Character
                 currentWeapon.transform.localPosition += Vector3.down * 4 * Time.deltaTime;
                 yield return null;
             }
-            Destroy(currentWeapon.gameObject);
+            currentWeapon.Disable();
         }
-        currentWeapon = Instantiate(weaponPrefabs[number], WeaponSpot.transform);
+
+        currentWeapon = weapons[number];
+        currentWeapon.Enable();
         HUD.UpdateWeaponInfo(currentWeapon);
         currentWeapon.transform.localPosition += Vector3.up * downPostion;
         for (; currentWeapon.transform.localPosition.y < 0;) {
@@ -49,6 +52,8 @@ public class FirstPersonController : Character
     protected override void Start()
     {
         base.Start();
+        for (int i = 0; i < weaponPrefabs.Length; i++)
+            AddWeapon(weaponPrefabs[i]);
         ChangeWeapon(0);
         HUD.UpdateMaxHP(maxHealthPoints);
         HUD.UpdateHP(healthPoints);
@@ -96,12 +101,33 @@ public class FirstPersonController : Character
         HUD.UpdateHP(healthPoints);
     }
 
+    public BaseWeapon FindWeaponType(BaseWeapon objective) {
+        foreach (var weapon in weapons) {
+            if (weapon.weaponName == objective.weaponName)
+                return weapon;
+        }
+        return null;
+    }
+
+    public void AddWeapon(BaseWeapon weapon) {
+        var existing = FindWeaponType(weapon);
+        if (existing) {
+            existing.bulletsStock += weapon.bulletsStock;
+        } else {
+            weapons.Add(Instantiate(weapon, WeaponSpot.transform));
+            weapons[weapons.Count - 1].gameObject.SetActive(false);
+        }
+    }
+
     protected override void OnTriggerEnter(Collider collider)
     {
         base.OnTriggerEnter(collider);
         if (collider.GetComponent<Drop>()) {
             var drop = collider.GetComponent<Drop>();
-            //if (drop)
+            if (drop.type == Drop.TypesEnum.weapon) {
+                AddWeapon(drop.item.GetComponent<BaseWeapon>());
+            }
+            Destroy(drop.gameObject);
         }
     }
 }

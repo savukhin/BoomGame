@@ -81,9 +81,10 @@ MonoBehaviour:
   recoilImpulse: 1
   fireRate: 0.4
   bulletsCapacity: 20
-  bulletsStock: 10
+  bulletsStock: 20
   bulletsMagazine: 10
-  reloadTime: 2
+  reloadTime: 1
+  weaponName: Makarov's Pistol
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
 --- !u!95 &-1561114175734925600
 Animator:

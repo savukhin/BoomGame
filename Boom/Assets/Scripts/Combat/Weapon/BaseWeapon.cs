@@ -12,6 +12,7 @@ public class BaseWeapon : MonoBehaviour
     public float bulletsStock = 0;
     public float bulletsMagazine = 0;
     public float reloadTime = 2f;
+    public string weaponName;
     private float timeToFire = 0;
     private Animator animator;
 
@@ -35,7 +36,7 @@ public class BaseWeapon : MonoBehaviour
 
     IEnumerator ReloadProcess() {
         if (animator)
-            animator.SetTrigger("Reload");
+            animator.PlayInFixedTime("Reload", -1, reloadTime);
         
         yield return new WaitForSeconds(reloadTime);
 
@@ -44,6 +45,7 @@ public class BaseWeapon : MonoBehaviour
             restored = bulletsStock;
         bulletsStock -= restored;
         bulletsMagazine += restored;
+        animator.Play("IDLE");
     }
 
     public virtual bool Fire() {
@@ -70,5 +72,14 @@ public class BaseWeapon : MonoBehaviour
         transform.localPosition = Vector3.zero;
         if (bulletsMagazine == 0)
             Reload();
+    }
+
+    public void Disable() {
+        animator.Rebind();
+        gameObject.SetActive(false);
+    }
+
+    public void Enable() {
+        gameObject.SetActive(true);
     }
 }
