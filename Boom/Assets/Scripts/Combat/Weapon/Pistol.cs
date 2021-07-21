@@ -11,8 +11,9 @@ public class Pistol : BaseWeapon
         if (base.Fire(burstShooting) == false)
             return false;
 
-        var bullet = Instantiate(bulletPrefab, firePoint.transform.position, GetStrifedRotation(strifeRadius));
+        var bullet = Instantiate(bulletPrefab, realFirePoint.transform.position, GetStrifedRotation(strifeRadius));
         bullet.hitTags.Add("Enemy");
+        bullet.ingoreTags.Add("Player");
         StartCoroutine(DoRecoil());
 
         return true;

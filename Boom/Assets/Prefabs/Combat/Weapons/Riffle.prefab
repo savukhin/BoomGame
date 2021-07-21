@@ -158,7 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 5985028480461381621, guid: 5f2ea4d458df94e4abb2b08aea47dd36, type: 3}
-  firePoint: {fileID: 3506931378547664589}
+  fakeFirePoint: {fileID: 3506931378547664589}
+  realFirePoint: {fileID: 0}
   recoilImpulse: 1
   fireRate: 0.1
   bulletsCapacity: 30

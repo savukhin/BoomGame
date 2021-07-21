@@ -18,8 +18,9 @@ public class Riffle : BaseWeapon
         if (base.Fire(burstShooting) == false)
             return false;
         
-        var bullet = Instantiate(bulletPrefab, firePoint.transform.position, GetStrifedRotation(strifeRadius + Mathf.Min(burstCounter, 10)));
+        var bullet = Instantiate(bulletPrefab, realFirePoint.transform.position, GetStrifedRotation(strifeRadius + Mathf.Min(burstCounter, 10)));
         bullet.hitTags.Add("Enemy");
+        bullet.ingoreTags.Add("Player");
         StartCoroutine(DoRecoil(Mathf.Min(burstCounter / 5, 2)));
 
         return true;

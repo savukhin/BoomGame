@@ -5,7 +5,8 @@ using UnityEngine;
 public class BaseWeapon : MonoBehaviour
 {
     public VFX fireVFX;
-    public GameObject firePoint;
+    public GameObject fakeFirePoint;
+    public GameObject realFirePoint;
     public float recoilImpulse = 1f;
     public float fireRate = 0.4f;
     public float bulletsCapacity = 10;
@@ -26,7 +27,7 @@ public class BaseWeapon : MonoBehaviour
     }
 
     protected Quaternion GetStrifedRotation(float strife) {
-        var rotation = firePoint.transform.rotation.eulerAngles;
+        var rotation = realFirePoint.transform.rotation.eulerAngles;
         rotation += new Vector3(Random.Range(-strifeRadius, strife),
                                 Random.Range(-strifeRadius, strife),
                                 Random.Range(-strifeRadius, strife));
@@ -79,7 +80,7 @@ public class BaseWeapon : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
         if (fireVFX)
-            Instantiate(fireVFX, firePoint.transform.position, firePoint.transform.rotation);
+            Instantiate(fireVFX, fakeFirePoint.transform.position, fakeFirePoint.transform.rotation);
         bulletsMagazine -= 1;
         timeToFire = Time.time + fireRate;
         return true;

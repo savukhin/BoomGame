@@ -5,10 +5,12 @@ using UnityEngine;
 public class FirstPersonController : Character
 {
     public HUDController HUD;
+    public GameObject head;
     public GameObject WeaponSpot;
     public BaseWeapon[] weaponPrefabs;
     public List<BaseWeapon> weapons = new List<BaseWeapon>();
     private BaseWeapon currentWeapon;
+    public GameObject firePoint;
     private bool canFire = false;
 
     bool ChangeWeapon(int number) {
@@ -118,6 +120,7 @@ public class FirstPersonController : Character
         } else {
             weapons.Add(Instantiate(weapon, WeaponSpot.transform));
             weapons[weapons.Count - 1].gameObject.SetActive(false);
+            weapons[weapons.Count - 1].realFirePoint = firePoint;
             ChangeWeapon(weapons.Count - 1);
         }
     }

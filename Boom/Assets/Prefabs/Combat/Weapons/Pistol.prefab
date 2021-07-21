@@ -77,7 +77,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 5985028480461381621, guid: 5f2ea4d458df94e4abb2b08aea47dd36, type: 3}
-  firePoint: {fileID: 424395054055434457}
+  fakeFirePoint: {fileID: 424395054055434457}
+  realFirePoint: {fileID: 0}
   recoilImpulse: 1
   fireRate: 0.4
   bulletsCapacity: 20
@@ -85,6 +86,8 @@ MonoBehaviour:
   bulletsMagazine: 10
   reloadTime: 1
   weaponName: Makarov's Pistol
+  allowBurstShooting: 0
+  strifeRadius: 4
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
 --- !u!95 &-1561114175734925600
 Animator:

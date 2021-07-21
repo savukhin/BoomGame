@@ -128,7 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 5985028480461381621, guid: 5f2ea4d458df94e4abb2b08aea47dd36, type: 3}
-  firePoint: {fileID: 8837119858791939945}
+  fakeFirePoint: {fileID: 8837119858791939945}
+  realFirePoint: {fileID: 0}
   recoilImpulse: 1.2
   fireRate: 0.4
   bulletsCapacity: 5
@@ -136,9 +137,10 @@ MonoBehaviour:
   bulletsMagazine: 5
   reloadTime: 1.4
   weaponName: Wierd Shotgun
+  allowBurstShooting: 0
+  strifeRadius: 20
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
   bulletCount: 5
-  strifeRadius: 20
 --- !u!95 &2732116005655409940
 Animator:
   serializedVersion: 3
@@ -182,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837119858791939945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.47, z: 1.654}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1.654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4015587709674281417}
