@@ -54,4 +54,6 @@ public class Character : MonoBehaviour
         if (healthPoints <= 0)
             Destroy(gameObject);
     }
+
+    protected virtual void OnTriggerEnter(Collider collider) {}
 }
