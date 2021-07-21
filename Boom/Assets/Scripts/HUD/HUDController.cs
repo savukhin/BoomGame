@@ -5,6 +5,11 @@ using UnityEngine;
 public class HUDController : MonoBehaviour
 {
     public ProgressBar HPBar;
+    public WeaponInfoUI weaponInfo;
+
+    public void UpdateWeaponInfo(BaseWeapon weapon) {
+        weaponInfo.UpdateWeaponInfo(weapon);
+    }
 
     public void UpdateHP(float HP) {
         HPBar.current = HP;

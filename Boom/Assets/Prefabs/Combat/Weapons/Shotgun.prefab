@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4015587709674281417}
   - component: {fileID: 3153122820398859783}
+  - component: {fileID: 2732116005655409940}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -128,9 +129,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 5985028480461381621, guid: 5f2ea4d458df94e4abb2b08aea47dd36, type: 3}
   firePoint: {fileID: 8837119858791939945}
+  recoilImpulse: 1.2
+  fireRate: 0.4
+  bulletsCapacity: 5
+  bulletsStock: 5
+  bulletsMagazine: 5
+  reloadTime: 2
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
   bulletCount: 5
   strifeRadius: 20
+--- !u!95 &2732116005655409940
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015587709674281418}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2adf33dac1aa02a4aa4b9be38616ea47, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8837119858791939945
 GameObject:
   m_ObjectHideFlags: 0

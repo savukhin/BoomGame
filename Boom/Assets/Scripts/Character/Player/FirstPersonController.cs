@@ -18,6 +18,12 @@ public class FirstPersonController : Character
         return true;
     }
 
+    void ReloadWeapon() {
+        if (!currentWeapon)
+            return;
+        currentWeapon.Reload();
+    }
+
     IEnumerator ChangeWeponAnimation(int number) {
         canFire = false;
         var downPostion = -0.8f;
@@ -29,6 +35,7 @@ public class FirstPersonController : Character
             Destroy(currentWeapon.gameObject);
         }
         currentWeapon = Instantiate(weaponPrefabs[number], WeaponSpot.transform);
+        HUD.UpdateWeaponInfo(currentWeapon);
         currentWeapon.transform.localPosition += Vector3.up * downPostion;
         for (; currentWeapon.transform.localPosition.y < 0;) {
             currentWeapon.transform.localPosition += Vector3.up * 4 * Time.deltaTime;
@@ -61,6 +68,8 @@ public class FirstPersonController : Character
             ChangeWeapon(1);
         if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangeWeapon(2);
+        if (Input.GetKeyDown(KeyCode.R))
+            ReloadWeapon();
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             Jump();
         if (Input.GetMouseButtonDown(0))

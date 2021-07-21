@@ -6,10 +6,16 @@ public class Pistol : BaseWeapon
 {
     public BaseBullet bulletPrefab;
     
-    public override void Fire()
+    public override bool Fire()
     {
-        base.Fire();
+        
+        if (base.Fire() == false)
+            return false;
+
         var bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
         bullet.hitTags.Add("Enemy");
+        StartCoroutine(DoRecoil());
+
+        return true;
     }
 }

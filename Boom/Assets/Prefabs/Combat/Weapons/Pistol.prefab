@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5256967596326261128}
   - component: {fileID: 2487335860354685018}
+  - component: {fileID: -1561114175734925600}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -77,7 +78,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 5985028480461381621, guid: 5f2ea4d458df94e4abb2b08aea47dd36, type: 3}
   firePoint: {fileID: 424395054055434457}
+  recoilImpulse: 1
+  fireRate: 0.4
+  bulletsCapacity: 20
+  bulletsStock: 10
+  bulletsMagazine: 10
+  reloadTime: 2
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
+--- !u!95 &-1561114175734925600
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881709038296124210}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2adf33dac1aa02a4aa4b9be38616ea47, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4968133241593349127
 GameObject:
   m_ObjectHideFlags: 0
