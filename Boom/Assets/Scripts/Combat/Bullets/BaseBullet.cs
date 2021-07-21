@@ -6,16 +6,14 @@ using UnityEngine;
 public class BaseBullet : MonoBehaviour
 {
     public float damage = 10;
-    public float startSpeed = 20;
+    public VFX hitVFX;
     public List<string> hitTags = new List<string>();
     public List<string> ingoreTags = new List<string>() {"Bullet", "Volume"};
-    private Rigidbody rb;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * startSpeed, ForceMode.VelocityChange);
+
     }
 
     // Update is called once per frame
@@ -24,10 +22,10 @@ public class BaseBullet : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider collider) {
-        if (hitTags.Contains(collider.tag))
+    protected virtual bool Hit(Collider collider) {
+        if (hitTags.Contains(collider.tag)) {
             collider.GetComponent<Character>().TakeDamage(damage);
-        if (!ingoreTags.Contains(collider.tag))
-            Destroy(gameObject);
+        }
+        return !ingoreTags.Contains(collider.tag);
     }
 }

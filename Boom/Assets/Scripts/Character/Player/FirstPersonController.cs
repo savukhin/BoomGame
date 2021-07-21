@@ -59,9 +59,9 @@ public class FirstPersonController : Character
         HUD.UpdateHP(healthPoints);
     }
 
-    void Fire () {
+    void Fire (bool burstShooting=false) {
         if (currentWeapon && canFire)
-            currentWeapon.Fire();
+            currentWeapon.Fire(burstShooting);
     }
 
     protected override void Update()
@@ -79,6 +79,8 @@ public class FirstPersonController : Character
             Jump();
         if (Input.GetMouseButtonDown(0))
             Fire();
+        else if (Input.GetMouseButton(0))
+            Fire(true);
         MoveAndRotate();
     }
 
@@ -116,6 +118,7 @@ public class FirstPersonController : Character
         } else {
             weapons.Add(Instantiate(weapon, WeaponSpot.transform));
             weapons[weapons.Count - 1].gameObject.SetActive(false);
+            ChangeWeapon(weapons.Count - 1);
         }
     }
 

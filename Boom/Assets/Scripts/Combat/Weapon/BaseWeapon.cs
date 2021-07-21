@@ -6,22 +6,35 @@ public class BaseWeapon : MonoBehaviour
 {
     public VFX fireVFX;
     public GameObject firePoint;
-    public float recoilImpulse = 2f;
+    public float recoilImpulse = 1f;
     public float fireRate = 0.4f;
     public float bulletsCapacity = 10;
     public float bulletsStock = 0;
     public float bulletsMagazine = 0;
-    public float reloadTime = 2f;
+    public float reloadTime = 1f;
     public string weaponName;
+    public bool allowBurstShooting = false;
     private float timeToFire = 0;
+    public float strifeRadius = 4f;
+    private bool isBurst = false;
+    protected float burstCounter;
+
     private Animator animator;
 
-    void Start() {
+    protected virtual void Start() {
         animator = GetComponent<Animator>();
     }
 
+    protected Quaternion GetStrifedRotation(float strife) {
+        var rotation = firePoint.transform.rotation.eulerAngles;
+        rotation += new Vector3(Random.Range(-strifeRadius, strife),
+                                Random.Range(-strifeRadius, strife),
+                                Random.Range(-strifeRadius, strife));
+        return Quaternion.Euler(rotation);
+    }
+
     private bool ReadyToFire() {
-        if (Time.time < timeToFire || bulletsMagazine == 0)
+        if (Time.time < timeToFire || bulletsMagazine == 0 || (allowBurstShooting | !isBurst) == false)
             return false;
         return true;
     }
@@ -48,21 +61,32 @@ public class BaseWeapon : MonoBehaviour
         animator.Play("IDLE");
     }
 
-    public virtual bool Fire() {
-        if (!ReadyToFire())
+    public virtual bool Fire(bool burstShooting=false) {
+        if (!ReadyToFire()) {
+            isBurst = false;
+            burstCounter = 0;
             return false;
+        }
+
+        burstCounter++;
+        if (!burstShooting) {
+            burstCounter = 0;
+            isBurst = false;
+        }
+        isBurst = true;
         
         StopCoroutine("DoRecoil");
         transform.localPosition = Vector3.zero;
 
-        Instantiate(fireVFX, firePoint.transform.position, firePoint.transform.rotation);
+        if (fireVFX)
+            Instantiate(fireVFX, firePoint.transform.position, firePoint.transform.rotation);
         bulletsMagazine -= 1;
         timeToFire = Time.time + fireRate;
         return true;
     }
 
-    protected virtual IEnumerator DoRecoil() {
-        float velocity = -recoilImpulse / 10;
+    protected virtual IEnumerator DoRecoil(float additionalRecoil=0) {
+        float velocity = -(recoilImpulse + additionalRecoil) / 10;
         float resistanceAcceleration = 1f;
         for (; velocity < 0 || Vector3.Dot(Vector3.zero - transform.localPosition, transform.forward) > 0;) {
             velocity += resistanceAcceleration * Time.deltaTime;
@@ -70,8 +94,10 @@ public class BaseWeapon : MonoBehaviour
             yield return null;
         }
         transform.localPosition = Vector3.zero;
-        if (bulletsMagazine == 0)
+        if (bulletsMagazine == 0) {
+            isBurst = false;
             Reload();
+        }
     }
 
     public void Disable() {

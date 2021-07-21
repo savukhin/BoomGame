@@ -97,11 +97,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  startSpeed: 40
+  hitVFX: {fileID: 4582695846638428585, guid: 2015fd98e4196b54f807e289c9397d7e, type: 3}
   hitTags: []
   ingoreTags:
   - Bullet
   - Volume
+  startSpeed: 40
 --- !u!135 &125280144034094451
 SphereCollider:
   m_ObjectHideFlags: 0
