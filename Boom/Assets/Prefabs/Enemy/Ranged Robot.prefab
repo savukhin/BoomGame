@@ -616,12 +616,16 @@ MonoBehaviour:
   maxHealthPoints: 30
   healthPoints: 100
   jumpForce: 5
+  maxSpeed: 6
   moveSpeed: 2
   target: {x: 0, y: 0, z: 0}
   attackRange: 10
   attackRate: 1
   activationZone: {fileID: 3935286278933974094}
   attackCooldown: 1
+  possibleDrop:
+  - chance: 40
+    item: {fileID: 5399229500699125484, guid: b7ecb23ac96b85d4984c546474767f4f, type: 3}
   bulletPrefab: {fileID: -8245319934386043338, guid: 594110b63b981ae4189eb3b580dd50a6, type: 3}
   strikePoint: {fileID: 3935286279701304834}
 --- !u!1 &7659915204255246693

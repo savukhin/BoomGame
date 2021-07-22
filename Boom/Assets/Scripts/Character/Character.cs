@@ -55,5 +55,11 @@ public class Character : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public virtual void Heal(float heal) {
+        healthPoints = Mathf.Min(maxHealthPoints, healthPoints + heal);
+    }
+
     protected virtual void OnTriggerEnter(Collider collider) {}
+
+    protected virtual void OnCollisionEnter(Collision collision) {}
 }

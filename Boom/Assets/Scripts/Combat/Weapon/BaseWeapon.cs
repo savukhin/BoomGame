@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponTypesEnum {
+    Pistol = 1,
+    Shotgun = 2,
+    Riffle = 3,
+}
+
 public class BaseWeapon : MonoBehaviour
 {
     public VFX fireVFX;
@@ -103,6 +109,7 @@ public class BaseWeapon : MonoBehaviour
 
     public void Disable() {
         animator.Rebind();
+        isBurst = false;
         gameObject.SetActive(false);
     }
 

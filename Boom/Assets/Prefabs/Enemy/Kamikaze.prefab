@@ -86,7 +86,7 @@ MonoBehaviour:
   attackRate: 1
   activationZone: {fileID: 8893830935968304660}
   attackCooldown: 1
-  boomVFX: {fileID: 4582695846638428585, guid: 2015fd98e4196b54f807e289c9397d7e, type: 3}
+  boomVFX: {fileID: 5834804644840025289, guid: fe9a226badd87dd4c929697b72c009eb, type: 3}
   boomRange: 3
   boomDamage: 50
 --- !u!1 &2200565072427161435

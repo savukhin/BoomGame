@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Drop : MonoBehaviour
 {
-    public enum TypesEnum {
-        weapon = 1,
+    public virtual void Activate(FirstPersonController player) {}
+
+    public void AddForce(Vector3 direction) {
+
     }
-    public GameObject item;
-    public TypesEnum type;
+
+    void Update() {
+
+    }
 }

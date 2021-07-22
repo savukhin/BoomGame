@@ -105,12 +105,32 @@ public class FirstPersonController : Character
         HUD.UpdateHP(healthPoints);
     }
 
+    public override void Heal(float heal)
+    {
+        base.Heal(heal);
+        HUD.UpdateHP(healthPoints);
+    }
+
     public BaseWeapon FindWeaponType(BaseWeapon objective) {
         foreach (var weapon in weapons) {
             if (weapon.weaponName == objective.weaponName)
                 return weapon;
         }
         return null;
+    }
+
+    public BaseWeapon FindWeaponType(string objective) {
+        foreach (var weapon in weapons) {
+            if (weapon.weaponName == objective)
+                return weapon;
+        }
+        return null;
+    }
+
+    public void AddBullets(string weapon, int count) {
+        var existing = FindWeaponType(weapon);
+        if (existing)
+            existing.bulletsStock += count;
     }
 
     public void AddWeapon(BaseWeapon weapon) {
@@ -130,10 +150,20 @@ public class FirstPersonController : Character
         base.OnTriggerEnter(collider);
         if (collider.GetComponent<Drop>()) {
             var drop = collider.GetComponent<Drop>();
-            if (drop.type == Drop.TypesEnum.weapon) {
-                AddWeapon(drop.item.GetComponent<BaseWeapon>());
-            }
+            drop.Activate(this);
             Destroy(drop.gameObject);
         }
     }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        var collider = collision.collider;
+        if (collider.GetComponent<Drop>()) {
+            var drop = collider.GetComponent<Drop>();
+            drop.Activate(this);
+            Destroy(drop.gameObject);
+        }
+    }
+
 }

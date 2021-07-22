@@ -10,6 +10,12 @@ public class BaseEnemy : Character
     public ActivationZone activationZone;
     protected bool attacking = false;
     public float attackCooldown = 1f;
+    [System.Serializable]
+    public class DroppingItems {
+        public float chance;
+        public Drop item;
+    }
+    public List<DroppingItems> possibleDrop;
 
     // Start is called before the first frame update
     protected override void Start() {
@@ -84,5 +90,24 @@ public class BaseEnemy : Character
         //target = new Vector3();
         StartCoroutine("WanderAround");
         StopCoroutine("PersueTheTarget");
+    }
+
+    protected virtual void OnDestroy() {
+        foreach (var drop in possibleDrop) {
+            if (drop.chance < Random.Range(0f, 1f))
+                continue;
+            
+            var item = Instantiate(drop.item, transform.position, transform.rotation);
+            var itemRB = item.GetComponent<Rigidbody>();
+            if (!itemRB)
+                continue;
+            
+            var direction = Random.rotation.eulerAngles;
+            direction.y = Mathf.Clamp(direction.y, 330, 360);
+            direction = direction.normalized;
+
+            var force = direction * Random.Range(0.6f, 0.7f);
+            itemRB.AddForce(force, ForceMode.Impulse);
+        }
     }
 }

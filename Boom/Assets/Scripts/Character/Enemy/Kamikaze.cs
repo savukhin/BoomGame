@@ -12,6 +12,11 @@ public class Kamikaze : BaseEnemy
     protected override void Attack()
     {
         base.Attack();
+        Boom();
+        Destroy(gameObject);
+    }
+
+    private void Boom() {
         if (boomVFX)
             Instantiate(boomVFX, transform.position, transform.rotation);
         
@@ -21,7 +26,11 @@ public class Kamikaze : BaseEnemy
             if (player)
                 player.TakeDamage(boomDamage * (1 - Vector3.Distance(player.transform.position, transform.position) / boomRange));
         }
-        Destroy(gameObject);
+    }
+
+    protected override void OnDestroy() {
+        Boom();
+        base.OnDestroy();
     }
 
     void OnDrawGizmos() {
