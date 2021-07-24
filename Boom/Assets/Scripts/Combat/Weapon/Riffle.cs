@@ -20,7 +20,7 @@ public class Riffle : BaseWeapon
         
         var bullet = Instantiate(bulletPrefab, realFirePoint.transform.position, GetStrifedRotation(strifeRadius + Mathf.Min(burstCounter, 10)));
         bullet.hitTags.Add("Enemy");
-        bullet.ingoreTags.Add("Player");
+        bullet.ignoreTags.Add("Player");
         StartCoroutine(DoRecoil(Mathf.Min(burstCounter / 5, 2)));
 
         return true;

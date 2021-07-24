@@ -13,7 +13,7 @@ public class RangedRobot : BaseEnemy
         //Vector3 direction = (target - transform.position).normalized;
         var bullet = Instantiate(bulletPrefab, strikePoint.transform.position, strikePoint.transform.rotation);
         bullet.hitTags.Add("Player");
-        bullet.ingoreTags.Add("Enemy");
+        bullet.ignoreTags.Add("Enemy");
     }
 
     void OnDrawGizmos() {

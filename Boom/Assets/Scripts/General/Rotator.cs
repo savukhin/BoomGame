@@ -10,10 +10,10 @@ public class Rotator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        desiredRot += rotSpeed * Time.deltaTime;
+        desiredRot = transform.localRotation.eulerAngles.y + rotSpeed * Time.deltaTime * 10;
+
+        var desiredRotQ = Quaternion.Euler(transform.localEulerAngles.x, desiredRot, transform.localEulerAngles.z);
         
-        var desiredRotQ = Quaternion.Euler(transform.eulerAngles.x, desiredRot, transform.eulerAngles.z);
-        
-        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, desiredRotQ, 10*Time.deltaTime);
     }
 }

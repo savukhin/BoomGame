@@ -15,7 +15,7 @@ public class Shotgun : BaseWeapon
         for (int i = 0; i < bulletCount; i++) {
             var bullet = Instantiate(bulletPrefab, realFirePoint.transform.position, GetStrifedRotation(strifeRadius));
             bullet.hitTags.Add("Enemy");
-            bullet.ingoreTags.Add("Player");
+            bullet.ignoreTags.Add("Player");
         }
         StartCoroutine(DoRecoil());
         

@@ -12,8 +12,7 @@ public class Kamikaze : BaseEnemy
     protected override void Attack()
     {
         base.Attack();
-        Boom();
-        Destroy(gameObject);
+        Die();
     }
 
     private void Boom() {
@@ -28,8 +27,12 @@ public class Kamikaze : BaseEnemy
         }
     }
 
-    protected override void OnDestroy() {
+    protected override void Die() {
         Boom();
+        base.Die();
+    }
+
+    protected override void OnDestroy() {
         base.OnDestroy();
     }
 

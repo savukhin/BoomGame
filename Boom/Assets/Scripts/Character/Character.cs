@@ -11,11 +11,13 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     protected Rigidbody rb;
     private Vector3 additionalVelocity = Vector3.zero; 
+    protected Animator animator;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
         //MoveInDirection(transform.forward);
     }
 
@@ -34,6 +36,10 @@ public class Character : MonoBehaviour
         //     rb.velocity = rb.velocity.normalized * maxSpeed;
     }
 
+    protected virtual void Die() {
+        Destroy(gameObject);
+    }
+
     private bool isMovingForward = false;
 
     protected void MoveInDirection(Vector3 direction) {
@@ -49,10 +55,11 @@ public class Character : MonoBehaviour
     }
 
 
-    public virtual void TakeDamage(float damage) {
+    public virtual void TakeDamage(float damage, Vector3 knockBack=default(Vector3)) {
         healthPoints -= damage;
         if (healthPoints <= 0)
-            Destroy(gameObject);
+            Die();
+        rb.AddForce(knockBack, ForceMode.Impulse);
     }
 
     public virtual void Heal(float heal) {

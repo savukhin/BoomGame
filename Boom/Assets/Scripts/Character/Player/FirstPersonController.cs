@@ -99,9 +99,9 @@ public class FirstPersonController : Character
         transform.Rotate(0f, Input.GetAxis("Mouse X") * 3f, 0f);
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, Vector3 knockBack=default(Vector3))
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, knockBack);
         HUD.UpdateHP(healthPoints);
     }
 

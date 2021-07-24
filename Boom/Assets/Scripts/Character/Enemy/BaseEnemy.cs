@@ -53,7 +53,7 @@ public class BaseEnemy : Character
 
     } 
 
-     IEnumerator PersueTheTarget() {
+     protected virtual IEnumerator PersueTheTarget() {
         for (;;) {
             target = activationZone.target.transform.position;
             target = new Vector3(target.x, 0, target.z);
@@ -92,7 +92,9 @@ public class BaseEnemy : Character
         StopCoroutine("PersueTheTarget");
     }
 
-    protected virtual void OnDestroy() {
+    protected override void Die()
+    {
+        base.Die();
         foreach (var drop in possibleDrop) {
             if (drop.chance < Random.Range(0f, 1f))
                 continue;
@@ -109,5 +111,9 @@ public class BaseEnemy : Character
             var force = direction * Random.Range(0.6f, 0.7f);
             itemRB.AddForce(force, ForceMode.Impulse);
         }
+    }
+
+    protected virtual void OnDestroy() {
+        
     }
 }
