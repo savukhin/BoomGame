@@ -5,6 +5,7 @@ using UnityEngine;
 public class LazerRay : BaseBullet
 {
     public float maxDistance = 100;
+    public float knockBack = 3;
 
     private void Resize(float size) {
         transform.position = transform.parent.position + transform.forward.normalized * size;
@@ -24,7 +25,7 @@ public class LazerRay : BaseBullet
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (Hit(collider)) {
+        if (Hit(collider, knockBack)) {
             if (hitVFX)
                 Instantiate(hitVFX, transform.position, transform.rotation);
         }

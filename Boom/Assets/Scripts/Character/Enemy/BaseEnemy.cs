@@ -33,12 +33,12 @@ public class BaseEnemy : Character
 
     // Returns true if target in attack range
     protected bool MoveToTarget() {
-        Vector3 direction = (target - transform.position).normalized;
-        Vector3 rotateDirection = target - new Vector3(transform.position.x, 0, transform.position.z);
-        var q = Quaternion.LookRotation(rotateDirection);
+        //Vector3 direction = (target - transform.position).normalized;
+        Vector3 direction = target - new Vector3(transform.position.x, 0, transform.position.z);
+        var q = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 360 * Time.deltaTime);
         
-        if ((rotateDirection.normalized - transform.forward.normalized).magnitude > 0.1f)
+        if ((direction.normalized - transform.forward.normalized).magnitude > 0.1f)
             return false;
 
         if ((target - transform.position).magnitude > attackRange && !attacking) {

@@ -174,7 +174,7 @@ MonoBehaviour:
   healthPoints: 100
   jumpForce: 5
   maxSpeed: 6
-  moveSpeed: 4
+  defaultMoveSpeed: 4
   HUD: {fileID: 2035508604}
   head: {fileID: 2097921232}
   WeaponSpot: {fileID: 1605934313}
@@ -239,8 +239,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121222367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.024, z: -0}
-  m_LocalScale: {x: 0.01, y: 0.1, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0.0255, z: 0}
+  m_LocalScale: {x: 0.02, y: 0.1, z: 0.01}
   m_Children: []
   m_Father: {fileID: 318713512513150238}
   m_RootOrder: 1
@@ -256,7 +256,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &121222370
 MeshRenderer:
@@ -277,7 +277,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f71fd8a88ca60fe47b8661e7ac678304, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -319,7 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e32caa47df2fd5459f69bfd36983398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
+  knockBack: {x: -1, y: 0, z: -1}
 --- !u!1 &175058284
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +470,10 @@ PrefabInstance:
     - target: {fileID: 7714785348493187813, guid: dd77e8edecb93ca418d18b8cda2a44f8, type: 3}
       propertyPath: m_Name
       value: Shotgun Drop (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714785348797758619, guid: dd77e8edecb93ca418d18b8cda2a44f8, type: 3}
+      propertyPath: bulletsStock
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd77e8edecb93ca418d18b8cda2a44f8, type: 3}
@@ -1646,6 +1651,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 1.73}
     m_Extent: {x: 6.57, y: 8.4, z: 4.51}
   damage: 10
+  knockBack: {x: -1, y: 1, z: -1}
 --- !u!114 &626629171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,14 +1683,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5dd8da186d9e644827c4b2c6af4de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 300
-  healthPoints: 300
+  maxHealthPoints: 10000
+  healthPoints: 10000
   jumpForce: 5
   maxSpeed: 6
-  moveSpeed: 2
+  defaultMoveSpeed: 2
   target: {x: 0, y: 0, z: 0}
   attackRange: 0
-  attackRate: 1
+  attackRate: 0
   activationZone: {fileID: 302866696}
   attackCooldown: 1
   possibleDrop: []
@@ -1960,7 +1966,7 @@ MonoBehaviour:
   healthPoints: 100
   jumpForce: 5
   maxSpeed: 6
-  moveSpeed: 4
+  defaultMoveSpeed: 4
   HUD: {fileID: 2035508604}
   head: {fileID: 592146788}
   WeaponSpot: {fileID: 1605934313}
@@ -2594,6 +2600,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1872501795}
     m_Modifications:
+    - target: {fileID: 690410168857838998, guid: 0b263a73f13860c40acc8cb27cbdaa7f, type: 3}
+      propertyPath: bulletsStock
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 4556482377833572022, guid: 0b263a73f13860c40acc8cb27cbdaa7f, type: 3}
       propertyPath: m_Name
       value: Riffle

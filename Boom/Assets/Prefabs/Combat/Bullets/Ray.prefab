@@ -10014,13 +10014,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca138ee19f628ca4e8299e0676dd78a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   hitVFX: {fileID: 0}
   hitTags: []
   ignoreTags:
   - Bullet
   - Volume
   maxDistance: 100
+  knockBack: 4
 --- !u!136 &6029447101694925753
 CapsuleCollider:
   m_ObjectHideFlags: 0

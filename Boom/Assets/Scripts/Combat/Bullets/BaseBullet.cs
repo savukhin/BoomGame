@@ -22,9 +22,9 @@ public class BaseBullet : MonoBehaviour
         
     }
 
-    protected virtual bool Hit(Collider collider) {
+    protected virtual bool Hit(Collider collider, float knockBack=0) {
         if (hitTags.Contains(collider.tag)) {
-            collider.GetComponent<Character>().TakeDamage(damage);
+            collider.GetComponent<Character>().TakeDamage(damage, knockBack);
         }
         return !ignoreTags.Contains(collider.tag);
     }

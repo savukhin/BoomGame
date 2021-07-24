@@ -8,7 +8,8 @@ public class Character : MonoBehaviour
     public float healthPoints = 100;
     public float jumpForce = 5f;
     public float maxSpeed = 6f;
-    public float moveSpeed;
+    public float defaultMoveSpeed = 2;
+    protected float moveSpeed;
     protected Rigidbody rb;
     private Vector3 additionalVelocity = Vector3.zero; 
     protected Animator animator;
@@ -16,6 +17,7 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        moveSpeed = defaultMoveSpeed;
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         //MoveInDirection(transform.forward);
@@ -44,7 +46,7 @@ public class Character : MonoBehaviour
 
     protected void MoveInDirection(Vector3 direction) {
         isMovingForward = (direction == transform.forward);
-        rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
+        rb.MovePosition(rb.position + direction.normalized * moveSpeed * Time.deltaTime);
     }
 
     protected void Jump() {
@@ -55,11 +57,11 @@ public class Character : MonoBehaviour
     }
 
 
-    public virtual void TakeDamage(float damage, Vector3 knockBack=default(Vector3)) {
+    public virtual void TakeDamage(float damage, float knockBack=0) {
         healthPoints -= damage;
         if (healthPoints <= 0)
             Die();
-        rb.AddForce(knockBack, ForceMode.Impulse);
+        rb.AddForce(-transform.forward * knockBack, ForceMode.Impulse);
     }
 
     public virtual void Heal(float heal) {

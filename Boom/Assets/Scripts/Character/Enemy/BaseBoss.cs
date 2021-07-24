@@ -12,7 +12,7 @@ public class BaseBoss : BaseEnemy
     }
 
     public AttackDescription[] attacks;
-    private AttackDescription nextAttack;
+    protected AttackDescription nextAttack;
     private float timeBetweenAttacks = 2f;
 
     protected override void Start()
@@ -22,11 +22,17 @@ public class BaseBoss : BaseEnemy
         SetNextAttack();
     }
 
-    private void SetNextAttack() {
+    protected virtual void SetNextAttack() {
         if (nextAttack != null)
             attackCooldown = nextAttack.attack.duration + timeBetweenAttacks;
-        //nextAttack = attacks[Random.Range(0, attacks.Length)];
-        nextAttack = attacks[0];
+        nextAttack = attacks[Random.Range(0, attacks.Length)];
+        attackRange = nextAttack.attackRange;
+    }
+
+    protected virtual void SetNextAttack(AttackDescription attack) {
+        if (nextAttack != null)
+            attackCooldown = nextAttack.attack.duration + timeBetweenAttacks;
+        nextAttack = attack;
         attackRange = nextAttack.attackRange;
     }
 

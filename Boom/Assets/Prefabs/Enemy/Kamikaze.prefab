@@ -80,12 +80,14 @@ MonoBehaviour:
   healthPoints: 100
   jumpForce: 5
   maxSpeed: 6
+  defaultMoveSpeed: 5
   moveSpeed: 5
   target: {x: 0, y: 0, z: 0}
   attackRange: 2
   attackRate: 1
   activationZone: {fileID: 8893830935968304660}
   attackCooldown: 1
+  possibleDrop: []
   boomVFX: {fileID: 5834804644840025289, guid: fe9a226badd87dd4c929697b72c009eb, type: 3}
   boomRange: 3
   boomDamage: 50
